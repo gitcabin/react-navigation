@@ -150,9 +150,22 @@ export default function ScenesReducer(
       nextScenes.push(nextScene);
     }
   };
+  // repalced the mergeScene for staleSreens with the code below
+  //staleScenes.forEach(mergeScene);
+  let k = null;
+  let v = null;
 
-  staleScenes.forEach(mergeScene);
-  freshScenes.forEach(mergeScene);
+  staleScenes.forEach(scene => {
+    let {key} = scene;
+    k = key;
+    v = scene;
+  });
+
+newStaleScenes = k && v ? new Map([[k, v]]) : new Map();
+
+newStaleScenes.forEach(mergeScene);
+//end of edit
+freshScenes.forEach(mergeScene);
 
   nextScenes.sort(compareScenes);
 
